@@ -1,7 +1,9 @@
 const { Router } = require('express');
 const router = Router();
 const axios = require('axios');
+const { Pokemon , Type} = require('../db');
 
+// Esta funcion me trae los datos de los pokemons de la api.
 const getPokemonsApi = async () => {
     const pokemonsPrimero = await axios.get('https://pokeapi.co/api/v2/pokemon') // Aca me traigo los primeros 20 pokemons de la api.
     const pokemonSegundo = await axios.get(pokemonsPrimero.data.netx) // Aca me traigo los siguientes 20 pokemons.
@@ -35,5 +37,26 @@ const getPokemonsApi = async () => {
     }
 }
 
+// Esta funcion me trae los datos de los pokemons de la db.
+const getPokemonsDb = async () => {
+    try {
+        return await Pokemon.findAll({
+            include: {
+                model: Type,
+                attributes: ['name'],
+                through: {
+                    attributes: []
+                }
+            }
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Esta funcion concatena los datos de los pokemons de la api con los de la db.
+const getAllPokemons = async () => {
+    
+}
 
 module.exports = router;
