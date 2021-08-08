@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
     height: {
       type: DataTypes.INTEGER,
     },
-    weigth: {
+    weight: {
       type: DataTypes.INTEGER,
     },
     sprite: {
