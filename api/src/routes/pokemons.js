@@ -1,12 +1,12 @@
 const { Router } = require('express');
 const router = Router();
 const axios = require('axios');
-const { Pokemon , Type} = require('../db');
+const { Pokemon, Type } = require('../db');
 
 // Esta funcion me trae los datos de los pokemons de la api.
 const getPokemonsApi = async () => {
-    const pokemonsPrimero = await axios.get('https://pokeapi.co/api/v2/pokemon') // Aca me traigo los primeros 20 pokemons de la api.
-    const pokemonSegundo = await axios.get(pokemonsPrimero.data.netx) // Aca me traigo los siguientes 20 pokemons.
+    const pokemonsPrimero = await axios.get("https://pokeapi.co/api/v2/pokemon") // Aca me traigo los primeros 20 pokemons de la api.
+    const pokemonSegundo = await axios.get(pokemonsPrimero.data.next) // Aca me traigo los siguientes 20 pokemons.
     const totalPokemons = pokemonsPrimero.data.results.concat(pokemonSegundo.data.results) // Me guardo los 40 pokemons en una variable.
 
     try {
@@ -56,7 +56,35 @@ const getPokemonsDb = async () => {
 
 // Esta funcion concatena los datos de los pokemons de la api con los de la db.
 const getAllPokemons = async () => {
-    
+    const apiInfo = await getPokemonsApi();
+    const dbInfo = await getPokemonsDb();
+    const infoTotal = apiInfo.concat(dbInfo);
+    return infoTotal;
 }
 
+// ***RUTAS*** //
+
+router.get('/', async (req, res, next) => {
+    const {name} = req.query;
+    const pokemonsTotal = await getAllPokemons();
+    try {
+        if(name) {
+            let pokemonName = await pokemonsTotal.find(e => e.name.toLowerCase() === name.toLowerCase());
+            if(pokemonName === undefined) {
+                return res.status(404).json('Pokemon not found')
+            } else {
+                return res.status(200).json(pokemonName)
+            }
+        } else {
+            res.status(200).json(pokemonsTotal);
+        }
+    } catch (error) {
+        return next(error);
+    }
+})
+
+
+
+
 module.exports = router;
+
