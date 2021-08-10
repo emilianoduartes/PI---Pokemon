@@ -71,7 +71,7 @@ router.get('/', async (req, res, next) => {
         if(name) {
             let pokemonName = await pokemonsTotal.find(e => e.name.toLowerCase() === name.toLowerCase());
             if(pokemonName === undefined) {
-                return res.status(404).json('Pokemon not found')
+                return res.status(404).send('Pokemon not found')
             } else {
                 return res.status(200).json(pokemonName)
             }
@@ -86,7 +86,12 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res) => {
     const {id} = req.params;
     const allPokemons = await getAllPokemons();
-    
+    if(id) {
+        const pokemonId = await allPokemons.filter(e => e.id == id);
+        pokemonId.length ?
+        res.status(200).json(pokemonId) :
+        res.status(404).send('Pokemon not found')
+    }
 })
 
 router.post('/', async (req, res, next) => {
