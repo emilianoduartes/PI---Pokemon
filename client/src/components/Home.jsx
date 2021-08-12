@@ -1,4 +1,3 @@
-import { func } from 'prop-types';
 import React from 'react';
 import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
@@ -12,7 +11,7 @@ export default function Home() {
 
     useEffect (() => {
         dispatch(getPokemons());
-    },[])
+    },[dispatch])
 
     function handleClick(e) {
         e.preventDefault();
@@ -58,6 +57,15 @@ export default function Home() {
                     <option value = 'api'>Existentes</option>
                     <option value = 'created'>Creados</option>
                 </select>
+                {allPokemons?.map((e) => {
+                    return (
+                        <fragment>
+                            <Link to = {'/home/' + e.id}>
+                                <Card name={e.name} sprite={e.sprite} type={e.type} key={e.id}/>
+                            </Link>
+                        </fragment>
+                    );
+                })}
             </div>
         </div>
     )
