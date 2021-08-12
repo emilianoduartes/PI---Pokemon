@@ -5,7 +5,7 @@ export default function Card({ name, sprite, type }) {
         <div>
             <h3>{name}</h3>
             <h5>{type}</h5>
-            <img scr = {sprite} alt = 'img not found' width = '200px' height = '250px'/>
+            <img scr={sprite} alt="img not found" width="200px" height="250px"/>
         </div>
-    )
+    );
 }
