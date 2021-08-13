@@ -1,5 +1,6 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
+// import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { getPokemons } from '../actions/index';
 import {Link} from 'react-router-dom';
@@ -20,7 +21,7 @@ export default function Home() {
 
     return (
         <div>
-            <Link to = '/pokemons'>Crear pokemon</Link>
+            <Link to= '/pokemons'>Crear pokemon</Link>
             <h1>Proyecto Individual - Henry Pokemon</h1>
             <button onClick = {e => {handleClick(e)}}>
                 Volver a cargar todos los pokemons
@@ -60,8 +61,8 @@ export default function Home() {
                 {allPokemons?.map((e) => {
                     return (
                         <fragment>
-                            <Link to = {'/home/' + e.id}>
-                                <Card name={e.name} sprite={e.sprite} type={e.type} key={e.id}/>
+                            <Link to={"/home/" + e.id}>
+                                <Card name={e.name} type={e.types} sprite={e.sprite} />
                             </Link>
                         </fragment>
                     );
