@@ -1,14 +1,25 @@
 import React from 'react';
-import {useEffect} from 'react';
-// import {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { getPokemons } from '../actions/index';
+import { getPokemons, filterPokemonsByType, filterCreated, orderByName } from '../actions/index';
 import {Link} from 'react-router-dom';
 import Card from './Card';
+import Paginado from './Paginado';
 
 export default function Home() {
     const dispatch = useDispatch()
     const allPokemons = useSelector ((state) => state.pokemons)
+    const [orden, setOrden] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
+    const [pokemonsPerPage, setPokemonsPerPage] = useState(9)
+    const indexOfLastPokemon = currentPage * pokemonsPerPage // 9
+    const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage // 0
+    const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon)
+
+    const paginado = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    }
+
 
     useEffect (() => {
         dispatch(getPokemons());
@@ -19,6 +30,21 @@ export default function Home() {
         dispatch(getPokemons());
     }
 
+    function handleFilterType(e) {
+        dispatch(filterPokemonsByType(e.target.value))
+    }
+
+    function handleFilterCreated(e) {
+        dispatch(filterCreated(e.target.value))
+    }
+
+    function handleSort(e) {
+        e.preventDefault();
+        dispatch(orderByName(e.target.value))
+        setCurrentPage(1);
+        setOrden(`Ordenado ${e.target.value}`)
+    }
+
     return (
         <div>
             <Link to= '/pokemons'>Crear pokemon</Link>
@@ -27,11 +53,12 @@ export default function Home() {
                 Volver a cargar todos los pokemons
             </button>
             <div>
-                <select>
-                    <option value = 'acs'>Ascendente</option>
+                <select onChange={e => {handleSort(e)}}>
+                    <option value = 'asc'>Ascendente</option>
                     <option value = 'desc'>Descendente</option>
                 </select>
-                <select>
+                <select onChange={e => {handleFilterType(e)}}>
+                    <option value = 'all'>Todos</option>
                     <option value = 'normal'>Normal</option>
                     <option value = 'fighting'>Fighting</option>
                     <option value = 'flying'>Flying</option>
@@ -53,18 +80,24 @@ export default function Home() {
                     <option value = 'unknown'>Unknown</option>
                     <option value = 'shadow'>Shadow</option>
                 </select>
-                <select>
+                <select onChange={e => {handleFilterCreated(e)}}>
                     <option value = 'all'>Todos</option>
                     <option value = 'api'>Existentes</option>
                     <option value = 'created'>Creados</option>
                 </select>
-                {allPokemons?.map((e) => {
+                <Paginado 
+                    pokemonsPerPage = {pokemonsPerPage} 
+                    allPokemons = {allPokemons.length} 
+                    paginado = {paginado}
+                ></Paginado>
+                {currentPokemons?.map((e) => {
                     return (
-                        <fragment>
+                        <div>
                             <Link to={"/home/" + e.id}>
-                                <Card name={e.name} type={e.types} sprite={e.sprite} />
+                                <Card name={e.name} type={e.types} sprite={e.sprite} key={e.id} />
+                                {/* <Card name={e.name} type1={e.type1} type2={e.type2} sprite={e.sprite} /> */}
                             </Link>
-                        </fragment>
+                        </div>
                     );
                 })}
             </div>

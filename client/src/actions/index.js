@@ -9,3 +9,24 @@ export function getPokemons() {
         });
     };
 }
+
+export function filterPokemonsByType(payload) {
+    return {
+        type: 'FILTER_BY_TYPE',
+        payload
+    }
+}
+
+export function filterCreated(payload) {
+    return {
+        type: 'FILTER_CREATED',
+        payload
+    }
+}
+
+export function orderByName(payload) {
+    return {
+        type: 'ORDER_BY_NAME',
+        payload
+    }
+}
