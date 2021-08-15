@@ -26,7 +26,9 @@ const getPokemonsApi = async () => {
                         height: e.height,
                         weight: e.weight,
                         sprite: e.sprites.other.dream_world.front_default,
-                        types: e.types.map(e => e.type.name)  
+                        types: e.types.length < 2 ? [{name: e.types[0].type.name}] : [{name: e.types[0].type.name}, {name: e.types[1].type.name}]
+                        // type1: e.types[0].type.name,
+                        // type2: e.types[1]?.type.name,
                     })
                 })
                 return info;
@@ -95,7 +97,7 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', async (req, res, next) => {
-    const {name, hp, attack, defense, speed, height, weight, sprite, createdInDb, type} = req.body;
+    const {name, hp, attack, defense, speed, height, weight, sprite, createdInDb, types} = req.body;
     try {
         const createdPokemon = await Pokemon.create({
             name,
@@ -109,7 +111,7 @@ router.post('/', async (req, res, next) => {
             createdInDb
         });
         const createdDb = await Type.findAll({
-            where: {name: type}
+            where: {name: types}
         });
         createdPokemon.addType(createdDb);
         return res.status(200).send('Pokemon successfully created')
