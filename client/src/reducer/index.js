@@ -12,6 +12,11 @@ function rootReducer(state = initialState, action) {
                 pokemons: action.payload,
                 allPokemons: action.payload
             }
+            case 'GET_NAME_POKEMONS':
+                return {
+                    ...state,
+                    pokemons: action.payload
+                }
             case 'FILTER_BY_TYPE':
                 const allPokemons = state.allPokemons
                 // console.log(allPokemons.map(e => e.types.map(e => e.name)))
@@ -50,6 +55,30 @@ function rootReducer(state = initialState, action) {
                         return {
                             ...state,
                             pokemons: sortedArr
+                        }
+                        case 'ORDER_BY_ATTACK':
+                        let sortedAttack = action.payload === 'strong' ?
+                        state.pokemons.sort(function (a, b) {
+                            if(a.attack > b.attack) {
+                                return 1;
+                            }
+                            if(b.attack > a.attack) {
+                                return -1;
+                            }
+                            return 0;
+                        }) :
+                        state.pokemons.sort(function (a, b) {
+                            if(a.attack > b.attack) {
+                                return -1;
+                            }
+                            if(b.attack > a.attack) {
+                                return 1;
+                            }
+                            return 0;
+                        })
+                        return {
+                            ...state,
+                            pokemons: sortedAttack
                         }
             default: return state;
     }
