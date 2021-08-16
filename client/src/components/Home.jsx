@@ -12,7 +12,7 @@ export default function Home() {
 
     useEffect(() => {
         dispatch(getPokemons());
-    }, []);
+    }, [dispatch]);
 
     const allPokemons = useSelector((state) => state.pokemons);
     const types = useSelector((state) => state.types);
@@ -57,12 +57,12 @@ export default function Home() {
         e.preventDefault();
         dispatch(orderByAttack(e.target.value))
         setCurrentPage(1);
-        setOrder(`Ordenado ${e.target.value}`)
+        setOrder(`Orderado ${e.target.value}`)
     }
 
     return (
         <div>
-            <Link to= '/pokemons'>Create pokemon</Link>
+            <Link to= '/pokemon'>Create pokemon</Link>
             <h1>Proyecto Individual - Henry Pokemon</h1>
             <button onClick = {e => {handleClick(e)}}>Reload all pokemon</button>
             <div>
