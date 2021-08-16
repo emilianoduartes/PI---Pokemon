@@ -22,9 +22,13 @@ export function getTypes() {
 
 export function postPokemon(payload) {
     return async function (dispatch) {
-        const response = await axios.post("http://localhost:3001/pokemon",payload);
-        console.log(response)
-        return response;
+        try {
+            const response = await axios.post("http://localhost:3001/pokemons",payload);
+            console.log(response)
+            return response;
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 

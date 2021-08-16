@@ -3,10 +3,19 @@ import { Link, useHistory } from 'react-router-dom';
 import { postPokemon, getTypes } from '../actions/index';
 import { useDispatch, useSelector } from 'react-redux';
 
+function validate(input) {
+    let errors = {};
+    if(!input.name) {
+        errors.name = 'Name must be completed';
+    }
+    return errors;
+}
+
 export default function PokemonCreate() {
     const dispatch = useDispatch()
     const history = useHistory()
     const tipos = useSelector((state) => state.types)
+    const [errors, setErrors] = useState({});
 
     const [input,setInput] = useState({
         name: "",
@@ -17,7 +26,7 @@ export default function PokemonCreate() {
         height: "",
         weight: "",
         sprite: "",
-        type: []
+        types: []
     })
 
     function handleChange(e) {
@@ -25,6 +34,10 @@ export default function PokemonCreate() {
             ...input,
             [e.target.name]: e.target.value
         })
+        setErrors(validate({
+            ...input,
+            [e.target.name]: e.target.value
+        }))
         console.log(input)
     }
 
@@ -40,7 +53,7 @@ export default function PokemonCreate() {
     function handleSelect(e) {
         setInput({
             ...input,
-            type: [...input.type, e.target.value]
+            types: [...input.types, e.target.value]
         })
     }
 
@@ -58,9 +71,16 @@ export default function PokemonCreate() {
             height: "",
             weight: "",
             sprite: "",
-            type: []
+            types: []
         })
         history.push('/home')
+    }
+
+    function handleDelete(e) {
+        setInput({
+            ...input,
+            types: input.types.filter(el => el !== e)
+        })
     }
 
     useEffect(() => {
@@ -80,6 +100,9 @@ export default function PokemonCreate() {
                     name= "name"
                     onChange={(e) => handleChange(e)}
                     />
+                    {errors.name && (
+                        <p className='error'>{errors.name}</p>
+                    )}
                 </div>
                 <div>
                     <label>Hp:</label>
@@ -182,10 +205,16 @@ export default function PokemonCreate() {
                     ))}
                 </select>
                 <ul>
-                    <li>{input.type.map(e => e + ", ")}</li>
+                    <li>{input.types.map(e => e + ", ")}</li>
                 </ul>        
                 <button type='submit'>Create pokemon</button>
             </form>
+            {input.types.map(e =>
+                <div className='divTypes'>
+                    <p>{e}</p>
+                    <button className='botonX' onClick={() => handleDelete(e)}>x</button>
+                </div>      
+            )}
         </div>
     )
 }
