@@ -8,12 +8,8 @@ import Paginado from './Paginado';
 import SearchBar from './SearchBar';
 
 export default function Home() {
+    
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getPokemons());
-    }, [dispatch]);
-
     const allPokemons = useSelector((state) => state.pokemons);
     const types = useSelector((state) => state.types);
     const [orden, setOrden] = useState('')
@@ -27,7 +23,6 @@ export default function Home() {
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber)
     }
-
 
     useEffect (() => {
         dispatch(getPokemons());
@@ -61,10 +56,10 @@ export default function Home() {
     }
 
     return (
-        <div>
+        <div className='all'>
             <Link to= '/pokemon'>Create pokemon</Link>
-            <h1>Proyecto Individual - Henry Pokemon</h1>
-            <button onClick = {e => {handleClick(e)}}>Reload all pokemon</button>
+            <h1>Pokemon App</h1>
+            <button onClick = {(e) => {handleClick(e)}}>Reload all pokemon</button>
             <div>
                 <select onChange={e => {handleSort(e)}}>
                     <option value = 'asc'>Ascending order</option>
@@ -102,22 +97,26 @@ export default function Home() {
                     <option value = 'api'>Existing</option>
                     <option value = 'created'>Created</option>
                 </select>
-                <Paginado 
-                    pokemonsPerPage = {pokemonsPerPage} 
-                    allPokemons = {allPokemons.length} 
-                    paginado = {paginado}
-                />
-                <SearchBar/>
-                {currentPokemons?.map((e) => {
-                    return (
-                        <div>
-                            <Link to={"/home/" + e.id}>
-                                <Card name={e.name} type={e.types} sprite={e.sprite} key={e.id} />
-                                {/* <Card name={e.name} type1={e.type1} type2={e.type2} sprite={e.sprite} /> */}
-                            </Link>
-                        </div>
-                    );
-                })}
+                <div>
+                    <Paginado 
+                        pokemonsPerPage={pokemonsPerPage} 
+                        allPokemons={allPokemons.length} 
+                        paginado={paginado}
+                    ></Paginado>
+                    <SearchBar></SearchBar>
+                </div>
+                {
+                    currentPokemons?.map((e) => {
+                        return (
+                            <div>
+                                <Link to={'/details/' + e.id}>
+                                    <Card name={e.name} type={e.types} sprite={e.sprite} key={e.id} />
+                                    {/* <Card name={e.name} type1={e.type1} type2={e.type2} sprite={e.sprite} /> */}
+                                </Link>
+                            </div>
+                        );
+                    })
+                }
             </div>
         </div>
     )

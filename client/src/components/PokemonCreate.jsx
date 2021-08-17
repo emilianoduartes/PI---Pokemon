@@ -198,16 +198,18 @@ export default function PokemonCreate() {
                         <label><input type="checkbox" name="shadow" value="shadow" onChange={(e)=>handleCheck(e)}/>Shadow</label>
                     </div>
                 </div> */}
-                <label>Types:</label>
-                <select onChange={(e) => handleSelect(e)}>
-                    {tipos.map((e) => (
-                        <option value={e}>{e}</option>
-                    ))}
-                </select>
-                <ul>
-                    <li>{input.types.map(e => e + ", ")}</li>
-                </ul>        
-                <button type='submit'>Create pokemon</button>
+                <div>
+                    <label>Types:</label>
+                    <select onChange={(e) => handleSelect(e)}>
+                        {tipos.map((e) => (
+                            <option value={e}>{e}</option>
+                        ))}
+                    </select>
+                    <ul>
+                        <li>{input.types.map(e => e + ", ")}</li>
+                    </ul>        
+                    <button type='submit'>Create pokemon</button>
+                </div>    
             </form>
             {input.types.map(e =>
                 <div className='divTypes'>

@@ -2,21 +2,29 @@ import axios from 'axios';
 
 export function getPokemons() {
     return async function(dispatch) {
-        const res = await axios.get("http://localhost:3001/pokemons")
-        return dispatch({
-            type: 'GET_POKEMONS',
-            payload: res.data
-        });
+        try {
+            const res = await axios.get("http://localhost:3001/pokemons")
+            return dispatch({
+                type: 'GET_POKEMONS',
+                payload: res.data
+            });
+        } catch (error) {
+            console.log(error)
+        }
     };
 }
 
 export function getTypes() {
     return async function(dispatch) {
-        const info = await axios.get("http://localhost:3001/types")
-        return dispatch({ 
-            type: 'GET_TYPES', 
-            payload: info.data
-        });
+        try {
+            const info = await axios.get("http://localhost:3001/types")
+            return dispatch({ 
+                type: 'GET_TYPES', 
+                payload: info.data
+            });
+        } catch (error) {
+            console.log(error)
+        }
     };
 }
 
@@ -74,3 +82,16 @@ export function orderByAttack(payload) {
     }
 }
 
+export function getDetail(id) {
+    return async function(dispatch) {
+        try {
+            var json = await axios.get("http://localhost:3001/pokemons/" + id);
+            return dispatch({
+                type: 'GET_DETAILS',
+                payload: json.data
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
