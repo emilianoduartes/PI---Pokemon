@@ -166,9 +166,9 @@ export default function PokemonCreate() {
                     <ul>
                         <p>{input.types.map(e => e + ", ")}</p>
                     </ul>        
-                    <button type='submit'>Create</button>
-                    <Link to= '/home'><button>Return</button></Link>
-                </div>    
+                    <button className='return' type='submit'>Create</button>
+                    <Link className='return' to= '/home'><button className='return'>Return</button></Link>
+                </div>
             </form>
             {input.types.map(e =>
                 <div className='divTypes'>

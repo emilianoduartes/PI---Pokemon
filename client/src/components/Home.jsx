@@ -64,15 +64,15 @@ export default function Home() {
             </p>
             <div>
                 <Link to= '/pokemon'><button>Create pokemon</button></Link>
-                <select onChange={e => {handleSort(e)}}>
+                <select className='select' onChange={e => {handleSort(e)}}>
                     <option value = 'asc'>Ascending order</option>
                     <option value = 'desc'>Descending order</option>
                 </select>
-                <select onChange={e => {handleSortAttack(e)}}>
+                <select className='select' onChange={e => {handleSortAttack(e)}}>
                     <option value = 'strong'>Stronger attack</option>
                     <option value = 'weak'>Weaker attack</option>
                 </select>
-                <select onChange={e => {handleFilterType(e)}}>
+                <select className='select' onChange={e => {handleFilterType(e)}}>
                     <option value = 'all'>All types</option>
                     <option value = 'normal'>Normal</option>
                     <option value = 'fighting'>Fighting</option>
@@ -95,12 +95,12 @@ export default function Home() {
                     <option value = 'unknown'>Unknown</option>
                     <option value = 'shadow'>Shadow</option>
                 </select>
-                <select onChange={e => {handleFilterCreated(e)}}>
+                <select className='select' onChange={e => {handleFilterCreated(e)}}>
                     <option value = 'all'>All pokemon</option>
                     <option value = 'api'>Existing</option>
                     <option value = 'created'>Created</option>
                 </select>
-                <button onClick = {(e) => {handleClick(e)}}>Reload all pokemon</button>
+                <button className='select' onClick = {(e) => {handleClick(e)}}>Delete filters</button>
                 <div>
                     {
                         currentPokemons &&    
