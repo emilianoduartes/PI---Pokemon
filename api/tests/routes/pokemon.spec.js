@@ -22,3 +22,16 @@ describe('Pokemon routes', () => {
     );
   });
 });
+
+describe('Type route', () => {
+  before(() => conn.authenticate()
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  }));
+  describe('GET /type', () => {
+    it('should get 200', () =>
+      agent.get('/type').expect(200)
+    );
+  });
+
+});
