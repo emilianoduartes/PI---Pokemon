@@ -27,8 +27,6 @@ const getPokemonsApi = async () => {
                         weight: e.weight,
                         sprite: e.sprites.other.dream_world.front_default,
                         types: e.types.length < 2 ? [{name: e.types[0].type.name}] : [{name: e.types[0].type.name}, {name: e.types[1].type.name}]
-                        // type1: e.types[0].type.name,
-                        // type2: e.types[1]?.type.name,
                     })
                 })
                 return info;
