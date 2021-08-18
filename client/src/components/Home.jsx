@@ -20,9 +20,6 @@ export default function Home() {
     const indexOfLastPokemon = currentPage * pokemonsPerPage // 9
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage // 0
     const currentPokemons = Array.isArray(allPokemons) && allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon)
-    // console.log(allPokemons)
-    // console.log(indexOfFirstPokemon)
-    // console.log(indexOfLastPokemon)
 
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber)

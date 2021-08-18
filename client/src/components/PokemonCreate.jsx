@@ -79,9 +79,6 @@ export default function PokemonCreate() {
 
     return (
         <div>
-            {/* <p>
-            <Link to= '/home'><button>Return</button></Link>
-            </p> */}
             <h1>Create your pokemon</h1>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <p>
