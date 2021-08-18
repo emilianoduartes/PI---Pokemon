@@ -79,11 +79,13 @@ export default function PokemonCreate() {
 
     return (
         <div>
+            {/* <p>
             <Link to= '/home'><button>Return</button></Link>
+            </p> */}
             <h1>Create your pokemon</h1>
             <form onSubmit={(e) => handleSubmit(e)}>
-                <div>
-                    <label>Name:</label>
+                <p>
+                    <label>Name: </label>
                     <input
                     type= "text"
                     value= {input.name}
@@ -93,81 +95,82 @@ export default function PokemonCreate() {
                     {errors.name && (
                         <p className='error'>{errors.name}</p>
                     )}
-                </div>
-                <div>
-                    <label>Hp:</label>
+                </p>
+                <p>
+                    <label>Hp: </label>
                     <input
                     type= "number"
                     value= {input.hp}
                     name= "hp"
                     onChange={(e) => handleChange(e)}
                     />
-                </div>
-                <div>
-                    <label>Attack:</label>
+                </p>
+                <p>
+                    <label>Attack: </label>
                     <input
                     type= "number"
                     value= {input.attack}
                     name= "attack"
                     onChange={(e) => handleChange(e)}
                     />
-                </div>
-                <div>
-                    <label>Defense:</label>
+                </p>
+                <p>
+                    <label>Defense: </label>
                     <input
                     type= "number"
                     value= {input.defense}
                     name= "defense"
                     onChange={(e) => handleChange(e)}
                     />
-                </div>
-                <div>
-                    <label>Speed:</label>
+                </p>
+                <p>
+                    <label>Speed: </label>
                     <input
                     type= "number"
                     value= {input.speed}
                     name= "speed"
                     onChange={(e) => handleChange(e)}
                     />
-                </div>
-                <div>
-                    <label>Height:</label>
+                </p>
+                <p>
+                    <label>Height: </label>
                     <input
                     type= "number"
                     value= {input.height}
                     name= "height"
                     onChange={(e) => handleChange(e)}
                     />
-                </div>
-                <div>
-                    <label>Weight:</label>
+                </p>
+                <p>
+                    <label>Weight: </label>
                     <input
                     type= "number"
                     value= {input.weight}
                     name= "weight"
                     onChange={(e) => handleChange(e)}
                     />
-                </div>
-                <div>
-                    <label>Sprite:</label>
+                </p>
+                <p>
+                    <label>Sprite: </label>
                     <input
                     type= "text"
                     value= {input.sprite}
                     name= "sprite"
                     onChange={(e) => handleChange(e)}
                     />
-                </div>
+                </p>
                 <div>
-                    <label>Types:</label>
+                    <label>Types: </label>
                     <select onChange={(e) => handleSelect(e)}>
                         {tipos.map((e) => (
                             <option value={e}>{e}</option>
                         ))}
                     </select>
                     <ul>
-                        <li>{input.types.map(e => e + ", ")}</li>
+                        <p>{input.types.map(e => e + ", ")}</p>
                     </ul>        
-                    <button type='submit'>Create pokemon</button>
+                    <button type='submit'>Create</button>
+                    <Link to= '/home'><button>Return</button></Link>
                 </div>    
             </form>
             {input.types.map(e =>

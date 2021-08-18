@@ -61,10 +61,12 @@ export default function Home() {
 
     return (
         <div className='all'>
-            <Link to= '/pokemon'>Create pokemon</Link>
             <h1>Pokemon App</h1>
-            <SearchBar></SearchBar>    
+            <p>
+                <SearchBar></SearchBar>    
+            </p>
             <div>
+                <Link to= '/pokemon'><button>Create pokemon</button></Link>
                 <select onChange={e => {handleSort(e)}}>
                     <option value = 'asc'>Ascending order</option>
                     <option value = 'desc'>Descending order</option>
@@ -74,7 +76,7 @@ export default function Home() {
                     <option value = 'weak'>Weaker attack</option>
                 </select>
                 <select onChange={e => {handleFilterType(e)}}>
-                    <option value = 'all'>All</option>
+                    <option value = 'all'>All types</option>
                     <option value = 'normal'>Normal</option>
                     <option value = 'fighting'>Fighting</option>
                     <option value = 'flying'>Flying</option>
@@ -97,21 +99,21 @@ export default function Home() {
                     <option value = 'shadow'>Shadow</option>
                 </select>
                 <select onChange={e => {handleFilterCreated(e)}}>
-                    <option value = 'all'>All</option>
+                    <option value = 'all'>All pokemon</option>
                     <option value = 'api'>Existing</option>
                     <option value = 'created'>Created</option>
                 </select>
+                <button onClick = {(e) => {handleClick(e)}}>Reload all pokemon</button>
                 <div>
-                    <button onClick = {(e) => {handleClick(e)}}>Reload all pokemon</button>
                     {
                         currentPokemons &&    
-                        <div>
+                        <p>
                             <Paginado 
                                 pokemonsPerPage={pokemonsPerPage} 
                                 allPokemons={allPokemons.length} 
                                 paginado={paginado}
                             ></Paginado>
-                        </div>
+                        </p>
                     }
                 </div>
                 <div>

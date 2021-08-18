@@ -20,7 +20,7 @@ export default function Detail(props) {
                 myPokemon.length > 0 ?
                 <div>
                     <h1>{myPokemon[0].name}</h1>
-                    <img src= {myPokemon[0].sprite} alt='' width= '300px' height= '350px'/>
+                    <img src= {myPokemon[0].sprite} alt='' width= '200px' height= '250px'/>
                     <h3>Types: {myPokemon[0].types.map(e => e.name + (' '))}</h3>
                     <h4>Id: {myPokemon[0].id}</h4>
                     <h4>Hp: {myPokemon[0].hp}</h4>
@@ -31,9 +31,9 @@ export default function Detail(props) {
                     <h4>Weight: {myPokemon[0].weight}</h4>
                 </div> : <p>Loading...</p>    
             }
-            <Link to= '/home' >
-                <button>Return</button>
-            </Link>
+            <p>
+                <Link to= '/home' ><button>Return</button></Link>
+            </p>
         </div>
     )
 }
