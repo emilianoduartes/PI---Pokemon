@@ -103,11 +103,22 @@ export default function Home() {
                 </select>
                 <div>
                     <button onClick = {(e) => {handleClick(e)}}>Reload all pokemon</button>
+                    {
+                        currentPokemons &&    
+                        <div>
+                            <Paginado 
+                                pokemonsPerPage={pokemonsPerPage} 
+                                allPokemons={allPokemons.length} 
+                                paginado={paginado}
+                            ></Paginado>
+                        </div>
+                    }
                 </div>
+                <div>
                     {
                         currentPokemons ? currentPokemons.map((e) => {
                             return (
-                                <div>
+                                <div className='cards'>
                                     <Link to={'/details/' + e.id}>
                                         <Card 
                                             name={e.name} 
@@ -130,16 +141,7 @@ export default function Home() {
                             </Link>
                         </div>
                     }
-                {
-                    currentPokemons &&    
-                <div>
-                    <Paginado 
-                        pokemonsPerPage={pokemonsPerPage} 
-                        allPokemons={allPokemons.length} 
-                        paginado={paginado}
-                    ></Paginado>
                 </div>
-                }
             </div>
         </div>
     )

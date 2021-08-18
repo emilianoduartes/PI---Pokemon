@@ -1,3 +1,9 @@
 body {
   background-color: gold;
 }
+
+.cards {
+  width: 30%;
+  float: left;
+  padding: 1em;
+}
