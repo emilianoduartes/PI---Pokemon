@@ -8,7 +8,6 @@ const initialState = {
 function rootReducer(state = initialState, action) {
     switch(action.type) {
         case 'GET_POKEMONS':
-        // console.log(action.payload)
         return {
             ...state,
             pokemons: action.payload,

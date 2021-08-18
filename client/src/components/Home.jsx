@@ -19,7 +19,7 @@ export default function Home() {
     const [pokemonsPerPage, setPokemonsPerPage] = useState(9);
     const indexOfLastPokemon = currentPage * pokemonsPerPage // 9
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage // 0
-    const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon)
+    const currentPokemons = Array.isArray(allPokemons) && allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon)
     // console.log(allPokemons)
     // console.log(indexOfFirstPokemon)
     // console.log(indexOfLastPokemon)
@@ -105,7 +105,7 @@ export default function Home() {
                     <button onClick = {(e) => {handleClick(e)}}>Reload all pokemon</button>
                 </div>
                     {
-                        currentPokemons?.map((e) => {
+                        currentPokemons ? currentPokemons.map((e) => {
                             return (
                                 <div>
                                     <Link to={'/details/' + e.id}>
@@ -118,8 +118,20 @@ export default function Home() {
                                     </Link>
                                 </div>
                             );
-                        })
+                        }) : 
+                        <div>
+                            <Link to={'/details/' + allPokemons.id}>
+                                <Card 
+                                    name={allPokemons.name} 
+                                    types={allPokemons.types.map(el => el.name + (' '))}
+                                    sprite={allPokemons.sprite} 
+                                    key={allPokemons.id}>
+                                </Card>
+                            </Link>
+                        </div>
                     }
+                {
+                    currentPokemons &&    
                 <div>
                     <Paginado 
                         pokemonsPerPage={pokemonsPerPage} 
@@ -127,6 +139,7 @@ export default function Home() {
                         paginado={paginado}
                     ></Paginado>
                 </div>
+                }
             </div>
         </div>
     )
