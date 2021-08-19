@@ -59,6 +59,7 @@ export default function Home() {
     return (
         <div className='all'>
             <h1>Pokemon App</h1>
+            {/* <img src="https://www.pinclipart.com/picdir/middle/533-5333611_team-building-clip-art.png" alt="img not found" width="200px" height="230px"/> */}
             <p>
                 <SearchBar></SearchBar>    
             </p>
