@@ -69,10 +69,6 @@ router.get('/', async (req, res) => {
     const pokemonsTotal = await getAllPokemons();
     try {
         if(name) {
-            // let pokemonName = await pokemonsTotal.filter(e => e.name.toLowerCase().includes(name.toLowerCase()))
-            // pokemonName.length ?
-            // res.status(200).json(pokemonName) :
-            // res.status(404).send('Pokemon not found')
             let pokemonName = await pokemonsTotal.find(e => e.name.toLowerCase() === name.toLowerCase());
             if(pokemonName === undefined) {
                 return res.status(404).send('Pokemon not found')
@@ -133,3 +129,10 @@ router.post('/', async (req, res) => {
 
 module.exports = router;
 
+
+
+
+// let pokemonName = await pokemonsTotal.filter(e => e.name.toLowerCase().includes(name.toLowerCase()))
+// pokemonName.length ?
+// res.status(200).json(pokemonName) :
+// res.status(404).send('Pokemon not found')
