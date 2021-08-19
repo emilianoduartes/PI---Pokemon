@@ -104,7 +104,7 @@ export default function Home() {
                 <button className='select' onClick = {(e) => {handleClick(e)}}>Delete filters</button>
                 <div>
                     {
-                        currentPokemons &&    
+                        currentPokemons &&
                         <p>
                             <Paginado 
                                 pokemonsPerPage={pokemonsPerPage} 
@@ -112,6 +112,7 @@ export default function Home() {
                                 paginado={paginado}
                             ></Paginado>
                         </p>
+
                     }
                 </div>
                 <div>
